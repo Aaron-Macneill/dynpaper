@@ -6,8 +6,10 @@ import os.path
 import time
 from sys import argv
 import datetime
+import socket
 
-VERSION = '1.1.1'
+
+VERSION = '1.2.0b'
 
 PROCESS_CALLS = {
     'gnome': "DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set org.gnome.desktop.background picture-uri file://{}",
@@ -212,7 +214,19 @@ def set_wallpaper(args):
     pass
 
 
+def acquire_lock():
+    __socket = socket.socket(
+        socket.AF_UNIX, socket.SOCK_DGRAM)
+    try:
+        __socket.bind('\0'+'dynpaper')
+    except socket.error:
+        print('Already running.')
+        exit(-1)
+    return __socket
+
+
 def main():
+    __socket = acquire_lock()
     args = arguments()
     if args.auto_run:
         add_to_shell(args, argv)
@@ -227,6 +241,7 @@ def main():
         while index == get_index(args):
             time.sleep(60 * args.interval)
         index = get_index(args)
+    __socket.close()
 
 
 if __name__ == '__main__':
