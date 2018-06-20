@@ -7,7 +7,7 @@ import time
 from sys import argv
 import datetime
 
-VERSION = '1.1.0'
+VERSION = '1.1.1'
 
 PROCESS_CALLS = {
     'gnome': "DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set org.gnome.desktop.background picture-uri file://{}",
@@ -30,8 +30,8 @@ def arguments():
     parser.add_argument('-f', '--file-template',
                         action='store', type=str, help='File template for the wallpapers,\
                          ex. \'~/Pictures/Wallpapers/mojave_dynamic_{}.png\', use \'{}\' to replace the number.')
-    parser.add_argument('-s', '--shell-conf', action='store', default='~/.bashrc',
-                        help='The config of the shell you are using, ~/.bashrc for bash, ~/.zshrc for zsh etc.')
+    parser.add_argument('-s', '--shell-conf', action='store', default='~/.bash_profile',
+                        help='The config of the shell you are using, ~/.bash_profile for bash, ~/.zprofile for zsh etc.')
     parser.add_argument('-r', '--dawn', action='store',
                         default='06:00', help='Dawn/sunrise time, ex. 06:23')
     parser.add_argument('-d', '--dusk', action='store',

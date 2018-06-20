@@ -81,24 +81,23 @@ dynpaper -f PATH_TO_FILE_WITHOUT_NUMBER -e gnome
 ```
 Example:
 ```sh
-dynpaper -a -f ~/Pictures/Wallpapers/mojave_dynamic_{}.png -s ~/.zshrc -e gnome
+dynpaper -a -f ~/Pictures/Wallpapers/mojave_dynamic_{}.png -s ~/.zprofile -e gnome
 ```
 * `-a` Will add the current configuration to the provided shell config file.  
 * `-f` Points to the file with the number replaced by `{}`.  
 * `-s` Points to the shell configuration file.  
 * `-e` Defines which environment to use to set the wallpaper.  
 
-Now, .zshrc contains the following:
+Now, .zprofile contains the following:
 
 ```sh
 #dynpaper
 dynpaper -f ~/Pictures/Wallpapers/mojave_dynamic_{}.png -e gnome &
 ```
 
-<<<<<<< HEAD
-=======
+__Note__: In order to autorun, please point to the appropriate configuration file, `.profile`/`.bash_profile` for bash and `.zprofile` for zsh. 
+
 Dawn and Dusk information are __not__ required. They have default values 06:00 and 20:00 respectively and serve to better integrade with the user's timezone.
->>>>>>> ecd45ef92c20e40a2042f9fb928f160d0f403eb4
 
 ## Contributing
 
