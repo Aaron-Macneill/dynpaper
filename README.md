@@ -54,12 +54,12 @@ optional arguments:
   -a, --auto-run        Turn flag on to add shell command in your shell config
                         file, default is ~/.bashrc, provide specific with -s
   -f FILE_TEMPLATE, --file-template FILE_TEMPLATE
-                        File template for the wallpapers, default is
+                        File template for the wallpapers, ex.
                         '~/Pictures/Wallpapers/mojave_dynamic_{}.png', use
-                        '{}' to denote the number.
+                        '{}' to replace the number.
   -s SHELL_CONF, --shell-conf SHELL_CONF
-                        The config of the shell you are using, ~/.bashrc for
-                        bash, ~/.zshrc for zsh etc.
+                        The config of the shell you are using, ~/.bash_profile
+                        for bash, ~/.zprofile for zsh etc.
   -r DAWN, --dawn DAWN  Dawn/sunrise time, ex. 06:23
   -d DUSK, --dusk DUSK  Dusk/sunset time, ex. 20:23
   -e {gnome,budgie,nitrogen,feh}, --env {gnome,budgie,nitrogen,feh}
@@ -72,6 +72,7 @@ optional arguments:
                         files[13, 16] inclusive are split throughout the
                         night.If you are using apple's wallpapers, don't set
                         it.
+
 ```
 
 Most of these are __optional__ arguments and only -e/--env and -f/--file-template, are required.
