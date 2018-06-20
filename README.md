@@ -30,7 +30,7 @@ Currently supports:
 
 * Gnome  
 * Nitrogen  
-
+* feh
 
 
 ## Installation

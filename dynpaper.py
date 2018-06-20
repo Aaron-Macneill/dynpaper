@@ -7,11 +7,12 @@ import time
 from sys import argv
 import datetime
 
-VERSION = '1.0.0'
+VERSION = '1.0.1'
 
 PROCESS_CALLS = {
     'gnome': "DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set org.gnome.desktop.background picture-uri file://{}",
-    'nitrogen': "nitrogen --set-auto {}"
+    'nitrogen': "nitrogen --set-auto {}",
+    'feh': "feh --bg-scale {}",
 }
 
 
