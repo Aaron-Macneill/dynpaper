@@ -17,7 +17,7 @@ The application calculates the duration of the day and night by finding the time
 
 ## Features
 Compared to the previous iteration, the app does __not__ use ip to find the coordinates and then the dawn and dusk, but relies on the user input, making the app usable both online and offline.  
-The app, if the user provides the necessary flags, adds a call to itself to the user provided(or the default) shell configuration file, allowing it to run automatically on login. For reference, the default file is ~/.bashrc and the app will add the following two lines
+The app, if the user provides the necessary flags, adds a call to itself to the user provided(or the default) shell configuration file, allowing it to run automatically on login. For reference, the default file is ~/.profile and the app will add the following two lines
 
 
 ```sh
@@ -52,7 +52,7 @@ usage: dynpaper [-h] [-a] [-f FILE_TEMPLATE] [-s SHELL_CONF] [-r DAWN]
 optional arguments:
   -h, --help            show this help message and exit
   -a, --auto-run        Turn flag on to add shell command in your shell config
-                        file, default is ~/.bashrc, provide specific with -s
+                        file, default is ~/.profile, provide specific with -s
   -f FILE_TEMPLATE, --file-template FILE_TEMPLATE
                         File template for the wallpapers, ex.
                         '~/Pictures/Wallpapers/mojave_dynamic_{}.png', use
