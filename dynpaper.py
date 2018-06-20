@@ -52,8 +52,19 @@ def arguments():
     err_dusk_dawn(args)
     err_set_auto(args)
     err_wallpapers(args)
+    err_interval(args)
 
     return args
+
+
+def err_interval(args):
+    try:
+        if not isinstance(args.interval, int):
+            raise ValueError
+        if args.interval < 1:
+            raise ValueError
+    except:
+        print('Interval needs to be an integer greater than 1')
 
 
 def err_range(args):
