@@ -7,10 +7,11 @@ import time
 from sys import argv
 import datetime
 
-VERSION = '1.0.1'
+VERSION = '1.1.0'
 
 PROCESS_CALLS = {
     'gnome': "DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set org.gnome.desktop.background picture-uri file://{}",
+    'budgie': "DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set org.gnome.desktop.background picture-uri file://{}",
     'nitrogen': "nitrogen --set-auto {}",
     'feh': "feh --bg-scale {}",
 }
@@ -27,8 +28,8 @@ def arguments():
                         default=False, action='store_const', const=True, help='Turn flag on to add\
                          shell command in your shell config file, default is ~/.bashrc, provide specific with -s')
     parser.add_argument('-f', '--file-template',
-                        action='store', default='~/Pictures/Wallpapers/mojave_dynamic_{}.png', help='File template for the wallpapers,\
-                         default is \'~/Pictures/Wallpapers/mojave_dynamic_{}.png\', use \'{}\' to denote the number.')
+                        action='store', type=str, help='File template for the wallpapers,\
+                         ex. \'~/Pictures/Wallpapers/mojave_dynamic_{}.png\', use \'{}\' to replace the number.')
     parser.add_argument('-s', '--shell-conf', action='store', default='~/.bashrc',
                         help='The config of the shell you are using, ~/.bashrc for bash, ~/.zshrc for zsh etc.')
     parser.add_argument('-r', '--dawn', action='store',
@@ -40,8 +41,14 @@ def arguments():
     parser.add_argument('-i', '--interval', action='store', type=int,
                         default=5, help='Refresh interval in minutes, default = 5.')
 
+    parser.add_argument(
+        '-g', '--file-range', action='store', default='(13,17)', help='File index range. Ex (13,17) indicates the files [1,12]\
+         inclusive are split throughout the day and the files[13, 16] inclusive are split throughout the night.If you are using\
+          apple\'s wallpapers, don\'t set it.')
+
     args = parser.parse_args(argv[1:])
 
+    err_range(args)
     err_dusk_dawn(args)
     err_set_auto(args)
     err_wallpapers(args)
@@ -49,8 +56,25 @@ def arguments():
     return args
 
 
+def err_range(args):
+    try:
+        args.file_range = eval(args.file_range)
+        if not isinstance(args.file_range, tuple):
+            raise ValueError
+        if args.file_range[0] > args.file_range[1]:
+            raise ValueError
+        if not isinstance(args.file_range[0], int):
+            raise ValueError
+        if not isinstance(args.file_range[1], int):
+            raise ValueError
+    except:
+        print(
+            'Invalid format specified, please use x,y or (x,y) where x<y, x,y are integers.')
+        exit(-1)
+
+
 def err_wallpapers(args):
-    for i in range(1, 17):
+    for i in range(1, args.file_range[1]):
         file = args.file_template.format(i)
         if not os.path.isfile(file):
             print('File:{} does not exist.'.format(file))
@@ -120,7 +144,7 @@ def add_to_shell(args, argv):
     runf = "dynpaper "
     for arg in argv:
         runf = runf+' {}'.format(arg)
-    runf = runf + '&\n'
+    runf = runf + ' &\n'
 
     with open(args.shell_conf, 'r') as fp:
         content = fp.readlines()
@@ -152,16 +176,20 @@ def get_index(args):
     day_dur = dusk_time-dawn_time
     night_duration = 24.0 - day_dur
 
+    day_size = args.file_range[0]
+    night_size = args.file_range[1]-day_size
+
     if dawn_time+day_dur >= current_time and current_time >= dawn_time:
         # It's day
-        index = (current_time - dawn_time)/(day_dur/13)
+        index = (current_time - dawn_time)/(day_dur/day_size)
     else:
         # It's night
         if current_time > dawn_time:
-            index = 13 + (current_time-day_dur-dawn_time)/(night_duration/4)
+            index = day_size + (current_time-day_dur -
+                                dawn_time)/(night_duration/night_size)
         else:
-            index = 13 + (current_time + 24-dawn_time-day_dur) / \
-                (night_duration/4)
+            index = day_size + (current_time + 24-dawn_time-day_dur) / \
+                (night_duration/night_size)
     return int(index+1)
 
 

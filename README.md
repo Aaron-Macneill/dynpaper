@@ -38,7 +38,7 @@ Currently supports:
 ```sh
 git clone https://github.com/oddProton/dynpaper  
 cd dynpaper  
-python setup.py install  
+./setup.py install  
 ```
 
 Download the MacOS Mojave wallpapers and extract them to any folder you'd like.  
@@ -46,7 +46,8 @@ Download the MacOS Mojave wallpapers and extract them to any folder you'd like.
 ## Running
 ```
 usage: dynpaper [-h] [-a] [-f FILE_TEMPLATE] [-s SHELL_CONF] [-r DAWN]
-                [-d DUSK] -e {gnome,nitrogen} [-i INTERVAL]
+                [-d DUSK] -e {gnome,budgie,nitrogen,feh} [-i INTERVAL]
+                [-g FILE_RANGE]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -61,11 +62,20 @@ optional arguments:
                         bash, ~/.zshrc for zsh etc.
   -r DAWN, --dawn DAWN  Dawn/sunrise time, ex. 06:23
   -d DUSK, --dusk DUSK  Dusk/sunset time, ex. 20:23
-  -e {gnome,nitrogen}, --env {gnome,nitrogen}
+  -e {gnome,budgie,nitrogen,feh}, --env {gnome,budgie,nitrogen,feh}
                         Your current desktop environment/wallpaper manager.
   -i INTERVAL, --interval INTERVAL
                         Refresh interval in minutes, default = 5.
+  -g FILE_RANGE, --file-range FILE_RANGE
+                        File index range. Ex (13,17) indicates the files
+                        [1,12] inclusive are split throughout the day and the
+                        files[13, 16] inclusive are split throughout the
+                        night.If you are using apple's wallpapers, don't set
+                        it.
 ```
+
+Most of these are __optional__ arguments and only -e/--env and -f/--file-template, are required.
+
 ```sh
 dynpaper -f PATH_TO_FILE_WITHOUT_NUMBER -e gnome
 ```
@@ -83,6 +93,7 @@ Now, .zshrc contains the following:
 #dynpaper
 dynpaper -f ~/Pictures/Wallpapers/mojave_dynamic_{}.png -e gnome &
 ```
+
 
 ## Contributing
 
