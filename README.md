@@ -77,12 +77,15 @@ dynpaper -a -f ~/Pictures/Wallpapers/mojave_dynamic_{}.png -s ~/.zshrc -e gnome
 * `-f` Points to the file with the number replaced by `{}`.  
 * `-s` Points to the shell configuration file.  
 * `-e` Defines which environment to use to set the wallpaper.  
+
 Now, .zshrc contains the following:
 
 ```sh
 #dynpaper
 dynpaper -f ~/Pictures/Wallpapers/mojave_dynamic_{}.png -e gnome &
 ```
+
+Dawn and Dusk information are __not__ required. They have default values 06:00 and 20:00 respectively and serve to better integrade woth the user's timezone.
 
 ## Contributing
 
@@ -94,7 +97,7 @@ dynpaper -f ~/Pictures/Wallpapers/mojave_dynamic_{}.png -e gnome &
 
 - [ ] Close the subprocess call.
 - [ ] Keep only one process running.
-- [ ] Expand it so it works with more combinations of wallpapers beside's apple's.
+- [ ] Expand it so it works with more combinations of wallpapers besides apple's.
 
 ## Acknowledgements
 
