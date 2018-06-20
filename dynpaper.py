@@ -26,12 +26,12 @@ def arguments():
 
     parser.add_argument('-a', '--auto-run',
                         default=False, action='store_const', const=True, help='Turn flag on to add\
-                         shell command in your shell config file, default is ~/.bashrc, provide specific with -s')
+                         shell command in your shell config file, default is ~/.profile, provide specific with -s')
     parser.add_argument('-f', '--file-template',
                         action='store', type=str, help='File template for the wallpapers,\
                          ex. \'~/Pictures/Wallpapers/mojave_dynamic_{}.png\', use \'{}\' to replace the number.')
-    parser.add_argument('-s', '--shell-conf', action='store', default='~/.bash_profile',
-                        help='The config of the shell you are using, ~/.bash_profile for bash, ~/.zprofile for zsh etc.')
+    parser.add_argument('-s', '--shell-conf', action='store', default='~/.profile',
+                        help='The config of the shell you are using, ~/.profile for bash, ~/.zprofile for zsh etc.')
     parser.add_argument('-r', '--dawn', action='store',
                         default='06:00', help='Dawn/sunrise time, ex. 06:23')
     parser.add_argument('-d', '--dusk', action='store',
