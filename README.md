@@ -85,7 +85,7 @@ Now, .zshrc contains the following:
 dynpaper -f ~/Pictures/Wallpapers/mojave_dynamic_{}.png -e gnome &
 ```
 
-Dawn and Dusk information are __not__ required. They have default values 06:00 and 20:00 respectively and serve to better integrade woth the user's timezone.
+Dawn and Dusk information are __not__ required. They have default values 06:00 and 20:00 respectively and serve to better integrade with the user's timezone.
 
 ## Contributing
 
