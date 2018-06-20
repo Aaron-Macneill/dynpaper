@@ -109,8 +109,8 @@ Dawn and Dusk information are __not__ required. They have default values 06:00 a
 ## To-do
 
 - [ ] Close the subprocess call.
-- [ ] Keep only one process running.
-- [ ] Expand it so it works with more combinations of wallpapers besides apple's.
+- [x] Keep only one process running.
+- [x] Expand it so it works with more combinations of wallpapers besides apple's.
 
 ## Acknowledgements
 

@@ -9,7 +9,7 @@ import datetime
 import socket
 
 
-VERSION = '1.2.0b'
+VERSION = '1.2.1'
 
 PROCESS_CALLS = {
     'gnome': "DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set org.gnome.desktop.background picture-uri file://{}",
@@ -241,7 +241,6 @@ def main():
         while index == get_index(args):
             time.sleep(60 * args.interval)
         index = get_index(args)
-    __socket.close()
 
 
 if __name__ == '__main__':
